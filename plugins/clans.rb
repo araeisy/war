@@ -1,6 +1,6 @@
 if !bd[message.from.id] && !@config["bban"].include?(message.from.id)
 	c = message.text.to_s.split
-	if message.text.to_s.start_with?("#clan") && message.text.to_s.split.length == 3 && db[message.from.id]
+	if message.text.to_s.start_with?("/clan") && message.text.to_s.split.length == 3 && db[message.from.id]
 		case c[1]
 		when "create"
 			if db[message.from.id]["res"] >= 150
