@@ -1,10 +1,10 @@
 {
     "BotName"    :    "TELEWAR",
-    "Token"    :    "place_your_bot_token_here",
-    "Version"    :    "v 2.1",
-    "Devlopers" 	:	[106191362],
+    "Token"    :    "241285014:AAF_UQZyjy1wL9j96Nvhkqd3sbP6-_Y1iSM",
+    "Version"    :    "v 1.1",
+    "Devlopers" 	:	[195801672],
     "Groups"	:	[-1001024787932],
-    "Admins"	: [106191362,34235668,111940001,107434774],
+    "Admins"	: [195801672],
     "bban"	:	[]
 
 }
