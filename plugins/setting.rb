@@ -2,45 +2,45 @@
 
 if @config["Devlopers"].include?(message.from.id)
 	case message.text
-	when "#add"
+	when "/add"
 		@config["Groups"].insert(0,message.chat.id)
 		bot.api.send_message(chat_id: message.chat.id, text: "This group has been added" )
-	when "#prom"
+	when "/prom"
 		@config["Admins"].insert(0,message.reply_to_message.from.id)
 		bot.api.send_message(chat_id: message.chat.id, text: "#{message.reply_to_message.from.first_name} #{message.reply_to_message.from.last_name} has been promoted" )
-	when "#remove"
+	when "/remove"
 		@config["Groups"].delete(message.chat.id)
 		bot.api.send_message(chat_id: message.chat.id, text: "this group has been removed" )
-	when "#dem"
+	when "/dem"
 		@config["Admins"].delete(message.reply_to_message.from.id)
 		bot.api.send_message(chat_id: message.chat.id, text: "#{message.reply_to_message.from.first_name} #{message.reply_to_message.from.last_name} has been disqualified" )
 	end
 end
 if @config["Admins"].include?(message.from.id)
 	case message.text
-	when "#about"
-		bot.api.send_message(chat_id: message.chat.id, text: "⚔TELEWAR #{V}⚔\nBy @Eyeslov\nThanks to :\n@Hirokai for the bot design improvements\n@WhiteFromInsideNiggaFromOut & @Mic_key for helping bug fixes\n@Haru_kun for ideas.\n and special thanks to @hussainho10 & @UnkownOtaku & @Abdullah_kready for watching :)" )
-	when "#how"
+	when "/about"
+		bot.api.send_message(chat_id: message.chat.id, text: "⚔TELEWAR #{V}⚔\nBy @XHACKERX :)" )
+	when "/how"
 		bot.api.send_message(chat_id: message.chat.id, text: "⚔TELEWAR #{V}⚔\n multiplayer telegram chat game" )
 	end
-	if message.text == "#id" 
+	if message.text == "/id" 
 		bot.api.send_message(chat_id: message.chat.id, text: message.chat.id, reply_to_message: message.message_id)
-	elsif message.text == "#ids" && message.reply_to_message
+	elsif message.text == "/ids" && message.reply_to_message
 		bot.api.send_message(chat_id: message.chat.id, text: message.reply_to_message.from.id )
-	elsif message.text == "#bban" && message.reply_to_message && !@config["Devlopers"].include?(message.reply_to_message.from.id)
+	elsif message.text == "/bban" && message.reply_to_message && !@config["Devlopers"].include?(message.reply_to_message.from.id)
 		bd[message.reply_to_message.from.id] = message.reply_to_message.from.id
 		bot.api.send_message(chat_id: message.chat.id, text: "#{message.reply_to_message.from.username} has been permanently blocked from the game" )
-	elsif message.text == "#ban" && message.reply_to_message && !@config["Devlopers"].include?(message.reply_to_message.from.id)
+	elsif message.text == "/ban" && message.reply_to_message && !@config["Devlopers"].include?(message.reply_to_message.from.id)
 		@config["bban"].insert(0,message.reply_to_message.from.id)
 		bot.api.send_message(chat_id: message.chat.id, text: "#{message.reply_to_message.from.username} has been blocked from the game" )
-	elsif message.text == "#unban" && message.reply_to_message && !@config["Devlopers"].include?(message.reply_to_message.from.id)
+	elsif message.text == "/unban" && message.reply_to_message && !@config["Devlopers"].include?(message.reply_to_message.from.id)
 		@config["bban"].delete(message.reply_to_message.from.id)
 		bot.api.send_message(chat_id: message.chat.id, text: "#{message.reply_to_message.from.username} has been unblocked" )
 	end
 end
 if  !bd[message.from.id] && !@config["bban"].include?(message.from.id)
 	case message.text
-	when "#signup"
+	when "/signup"
 		if db[message.from.id]
 			bot.api.send_message(chat_id: message.chat.id, text: "You're Already Registered!" )
 		else
@@ -71,10 +71,10 @@ if  !bd[message.from.id] && !@config["bban"].include?(message.from.id)
 		bot.api.send_message(chat_id: message.chat.id, text: "💲💲💲Shop💲💲💲\nfor buying send :\nBuy [pow,def,res] [1,2,3]\n》💪 Power Points\n1 -   50💪 for 10💎\n2 - 100💪 for 15💎\n3 - 250💪 for 30💎\n》🕸 Defense Points\n1 -  50 🕸 for 10 💎\n2 - 100🕸 for 15 💎\n3 - 250🕸 for 30 💎\n》🍎 Resources\n1 -   300🍎 for 15💎\n2 -   600🍎 for 25💎\n3 - 1400🍎 for 35💎" )
 	end
 
-	if message.text == "#login" && db[message.from.id]
+	if message.text == "/login" && db[message.from.id]
 		db[message.from.id]["Shield"] = false
 		bot.api.send_message(chat_id: message.chat.id, text: "Shield was disabled" )
-	elsif message.text == "#logout" && db[message.from.id]
+	elsif message.text == "/logout" && db[message.from.id]
 		db[message.from.id]["Shield"] = true
 		bot.api.send_message(chat_id: message.chat.id, text: "Shield has been activated" )
 	end
